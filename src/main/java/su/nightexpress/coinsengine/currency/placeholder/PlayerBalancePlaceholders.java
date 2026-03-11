@@ -2,6 +2,7 @@ package su.nightexpress.coinsengine.currency.placeholder;
 
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
+import org.bukkit.entity.Player;
 import su.nightexpress.excellenteconomy.api.currency.ExcellentCurrency;
 import su.nightexpress.coinsengine.currency.CurrencyManager;
 import su.nightexpress.coinsengine.currency.CurrencyRegistry;
@@ -71,6 +72,6 @@ public class PlayerBalancePlaceholders implements PlaceholderProvider {
     @FunctionalInterface
     private interface CurrencyPlaceholder {
 
-        @Nullable String parse(@NonNull org.bukkit.entity.Player player, @NonNull ExcellentCurrency currency);
+        @Nullable String parse(@NonNull Player player, @NonNull ExcellentCurrency currency);
     }
 }

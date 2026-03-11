@@ -77,7 +77,7 @@ public class CurrencyManager extends AbstractManager<CoinsEnginePlugin> {
         this.migrateSettings();
         this.loadPluginCommands();
         this.loadCurrencyCommands();
-        this.plugin.addGlobalPlaceholders(new PlayerBalancePlaceholders(this.registry, this));
+        this.registerGlobalPlaceholders();
 
         FileUtil.findYamlFiles(this.getDirectory()).forEach(this::loadCurrency);
 
@@ -148,6 +148,16 @@ public class CurrencyManager extends AbstractManager<CoinsEnginePlugin> {
             config.remove("Economy");
             config.saveChanges();
         });
+    }
+
+    private void registerGlobalPlaceholders() {
+        try {
+            this.plugin.addGlobalPlaceholders(new PlayerBalancePlaceholders(this.registry, this));
+        }
+        catch (NoClassDefFoundError exception) {
+            this.plugin.warn("Could not register placeholders: incompatible NightCore version detected.");
+            this.plugin.warn("Update NightCore to v2.14.0+ to enable CoinsEngine placeholders.");
+        }
     }
 
     private void loadPluginCommands() {

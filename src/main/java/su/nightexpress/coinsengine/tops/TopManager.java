@@ -67,8 +67,7 @@ public class TopManager extends AbstractManager<CoinsEnginePlugin> {
         }
 
         this.loadCommands();
-        this.plugin.addGlobalPlaceholders(new ServerBalancePlaceholders(this.currencyRegistry, this));
-        this.plugin.addGlobalPlaceholders(new TopBalancePlaceholders(this.currencyRegistry, this));
+        this.registerGlobalPlaceholders();
 
         this.addListener(new TopListener(this.plugin, this));
 
@@ -86,6 +85,17 @@ public class TopManager extends AbstractManager<CoinsEnginePlugin> {
             CommandDefinition.allEnabled(TopDefaults.COMMAND_TOP,  "balancetop", "baltop"),
             ExcellentCurrency::isLeaderboardEnabled
         );
+    }
+
+    private void registerGlobalPlaceholders() {
+        try {
+            this.plugin.addGlobalPlaceholders(new ServerBalancePlaceholders(this.currencyRegistry, this));
+            this.plugin.addGlobalPlaceholders(new TopBalancePlaceholders(this.currencyRegistry, this));
+        }
+        catch (NoClassDefFoundError exception) {
+            this.plugin.warn("Could not register leaderboard placeholders: incompatible NightCore version detected.");
+            this.plugin.warn("Update NightCore to v2.14.0+ to enable CoinsEngine placeholders.");
+        }
     }
 
     public void updateBalances() {

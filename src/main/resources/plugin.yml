@@ -1,8 +1,8 @@
-main: su.nightexpress.coinsengine.CoinsEnginePlugin
-version: '${project.version}'
-name: CoinsEngine
+main: su.nightexpress.excellenteconomy.EconomyPlugin
+version: '${version}'
+name: ExcellentEconomy
 author: NightExpress
-desciption: A lightweight and modern multi-currency and an economy plugin.
+desciption: A modern, lightweight economy plugin that lets you create unlimited custom currencies. 
 load: STARTUP
 api-version: 1.21
 depend: [ nightcore ]

@@ -6,7 +6,7 @@ import su.nightexpress.nightcore.util.wrapper.UniPermission;
 
 public class Perms {
 
-    public static final String PREFIX          = "coinsengine.";
+    public static final String PREFIX          = "excellenteconomy.";
     public static final String PREFIX_COMMAND  = PREFIX + "command.";
     public static final String PREFIX_CURRENCY = PREFIX + "currency.";
 

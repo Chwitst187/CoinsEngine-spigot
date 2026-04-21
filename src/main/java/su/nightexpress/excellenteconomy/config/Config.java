@@ -1,24 +1,18 @@
 package su.nightexpress.excellenteconomy.config;
 
-import su.nightexpress.nightcore.config.ConfigValue;
-import su.nightexpress.nightcore.util.Plugins;
+import static su.nightexpress.excellenteconomy.EconomyPlaceholders.CURRENCY_PREFIX;
+import static su.nightexpress.excellenteconomy.EconomyPlaceholders.WIKI_PLACEHOLDERS;
+import static su.nightexpress.nightcore.util.text.night.wrapper.TagWrappers.BOLD;
+import static su.nightexpress.nightcore.util.text.night.wrapper.TagWrappers.DARK_GRAY;
+import static su.nightexpress.nightcore.util.text.night.wrapper.TagWrappers.SOFT_YELLOW;
 
-import static su.nightexpress.excellenteconomy.EconomyPlaceholders.*;
-import static su.nightexpress.nightcore.util.text.night.wrapper.TagWrappers.*;
+import su.nightexpress.nightcore.config.ConfigValue;
 
 public class Config {
 
-    @Deprecated(forRemoval = true)
-    public static final ConfigValue<Boolean> GENERAL_PLACEHOLDER_API_FOR_CURRENCY_FORMAT = ConfigValue.create(
-        "General.PlaceholderAPI_For_Currency_Format",
-        true,
-        "[Deprecated]", "Always enabled since v2.7.0"
-    );
-
     public static final ConfigValue<Boolean> INTEGRATION_VAULT_ENABLED = ConfigValue.create("Integration.Vault.Enabled",
         true,
-        "Controls whether Vault integration is enabled.",
-        WIKI_VAULT_HOOK
+        "Enables Vault integration."
     );
 
     public static final ConfigValue<String> INTEGRATION_VAULT_ECONOMY_CURRENCY = ConfigValue.create(
@@ -53,8 +47,7 @@ public class Config {
 
     public static final ConfigValue<Boolean> CURRENCY_PREFIX_ENABLED = ConfigValue.create("Currency.Prefix.Enabled",
         true,
-        "Controls whether or not currency messages will use custom prefix instead of the plugin's one.",
-        WIKI_PREFIXES
+        "Controls whether or not currency messages will use custom prefix instead of the plugin's one."
     );
 
     public static final ConfigValue<String> CURRENCY_PREFIX_FORMAT = ConfigValue.create("Currency.Prefix.Format",
@@ -65,8 +58,7 @@ public class Config {
 
     public static final ConfigValue<Boolean> WALLET_ENABLED = ConfigValue.create("Wallet.Enabled",
         true,
-        "Controls whether Wallet feature is enabled.",
-        WIKI_WALLET
+        "Controls whether Wallet feature is enabled."
     );
 
     public static final ConfigValue<String[]> WALLET_ALIASES = ConfigValue.create("Wallet.Command_Aliases",
@@ -77,8 +69,7 @@ public class Config {
     public static final ConfigValue<Boolean> MIGRATION_ENABLED = ConfigValue.create("Migration.Enabled",
         true,
         "Controls whether Migration feature is available.",
-        "Disable if you don't plan to migrate from other plugins to save some RAM.",
-        WIKI_MIGRATION
+        "Disable if you don't plan to migrate from other plugins to save some RAM."
     );
 
     public static final ConfigValue<Boolean> LOGS_TO_CONSOLE = ConfigValue.create("Logs.Enabled.Console",
@@ -111,10 +102,5 @@ public class Config {
 
     public static boolean isMigrationEnabled() {
         return MIGRATION_ENABLED.get();
-    }
-
-    @Deprecated(forRemoval = true)
-    public static boolean useCurrencyFormatPAPI() {
-        return GENERAL_PLACEHOLDER_API_FOR_CURRENCY_FORMAT.get() && Plugins.hasPlaceholderAPI();
     }
 }

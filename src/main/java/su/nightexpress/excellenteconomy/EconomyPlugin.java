@@ -38,7 +38,7 @@ public class EconomyPlugin extends NightPlugin {
     @Override
     @NonNull
     protected PluginDetails getDefaultDetails() {
-        return PluginDetails.create("Economy", new String[]{"coinsengine", "coe", "ce"})
+        return PluginDetails.create("Economy", new String[]{"execo", "excellenteco", "excellenteconomy"})
             .setConfigClass(Config.class)
             .setPermissionsClass(Perms.class);
     }

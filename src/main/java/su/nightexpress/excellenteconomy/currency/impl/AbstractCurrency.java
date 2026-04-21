@@ -113,14 +113,12 @@ public abstract class AbstractCurrency implements ExcellentCurrency, ConfigBacke
 
         this.setPrefix(ConfigValue.create("Prefix", this.name,
             "Currency prefix.",
-            Placeholders.URL_WIKI_TEXT,
-            EconomyPlaceholders.WIKI_PREFIXES
+            Placeholders.URL_WIKI_TEXT
         ).read(config));
 
         this.setCommandAliases(ConfigValue.create("Command_Aliases", new String[]{this.id},
             "Currency command aliases. Split with comma.",
-            "[*] Server reboot is required for the changes to apply.",
-            EconomyPlaceholders.WIKI_COMMANDS
+            "[*] Server reboot is required for the changes to apply."
         ).read(config));
 
         this.setIcon(ConfigValue.create("Icon",
@@ -151,13 +149,11 @@ public abstract class AbstractCurrency implements ExcellentCurrency, ConfigBacke
         ).read(config));
 
         this.setColumnName(ConfigValue.create("Column_Name", this.id,
-            "Database column name where this currency will be saved.",
-            EconomyPlaceholders.WIKI_CROSS_SERVER
+            "Database column name where this currency will be saved."
         ).read(config));
 
         this.setSynchronizable(ConfigValue.create("Synchronized", true,
-            "Controls whether currency is included in data synchronization.",
-            EconomyPlaceholders.WIKI_CROSS_SERVER
+            "Controls whether currency is included in data synchronization."
         ).read(config));
 
         this.setDecimal(ConfigValue.create("Decimal", false,
@@ -166,8 +162,7 @@ public abstract class AbstractCurrency implements ExcellentCurrency, ConfigBacke
 
         this.setPermissionRequired(ConfigValue.create("Permission_Required",
             false,
-            "Controls whether permission is required for this currency.",
-            EconomyPlaceholders.WIKI_PERMISSIONS
+            "Controls whether permission is required for this currency."
         ).read(config));
 
         this.setTransferAllowed(ConfigValue.create("Transfer_Allowed",
@@ -194,8 +189,7 @@ public abstract class AbstractCurrency implements ExcellentCurrency, ConfigBacke
 
         this.setExchangeAllowed(ConfigValue.create("Exchange.Allowed",
             true,
-            "Controls whether this currency can be exchanged for other ones.",
-            EconomyPlaceholders.WIKI_EXCHANGE
+            "Controls whether this currency can be exchanged for other ones."
         ).read(config));
 
         if (config.getSection("Exchange.Rates").isEmpty()) {
@@ -211,8 +205,7 @@ public abstract class AbstractCurrency implements ExcellentCurrency, ConfigBacke
         this.leaderboardEnabled = ConfigValue.create("Leaderboard.Enabled",
             true,
             "Controls whether this currency can have a leaderboard.",
-            "[*] Requires the Tops module to be enabled.",
-            EconomyPlaceholders.WIKI_TOPS
+            "[*] Requires the Tops module to be enabled."
         ).read(config);
 
         this.updateMessagePrefix();
@@ -240,8 +233,8 @@ public abstract class AbstractCurrency implements ExcellentCurrency, ConfigBacke
 
         config.set("Exchange.Allowed", this.exchangeAllowed);
         config.remove("Exchange.Rates");
-        this.exchangeRates.forEach((id, rate) -> {
-            config.set("Exchange.Rates." + id, rate);
+        this.exchangeRates.forEach((otherId, rate) -> {
+            config.set("Exchange.Rates." + otherId, rate);
         });
 
         config.set("Leaderboard.Enabled", this.leaderboardEnabled);

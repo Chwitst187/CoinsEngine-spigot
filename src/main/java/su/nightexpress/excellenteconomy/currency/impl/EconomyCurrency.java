@@ -24,7 +24,7 @@ import java.util.List;
 
 public class EconomyCurrency extends AbstractCurrency implements Economy {
 
-    private static final EconomyResponse NO_BANKS = new EconomyResponse(0D, 0D, EconomyResponse.ResponseType.NOT_IMPLEMENTED, "CoinsEngine does not support bank accounts!");
+    private static final EconomyResponse NO_BANKS = new EconomyResponse(0D, 0D, EconomyResponse.ResponseType.NOT_IMPLEMENTED, "ExcellentEconomy does not support bank accounts!");
 
     private final ExcellentEconomyAPI api;
 

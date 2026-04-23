@@ -16,7 +16,10 @@ import su.nightexpress.excellenteconomy.migration.MigrationManager;
 import su.nightexpress.excellenteconomy.tops.TopManager;
 import su.nightexpress.excellenteconomy.user.UserManager;
 import su.nightexpress.nightcore.NightPlugin;
+import su.nightexpress.nightcore.bridge.placeholder.PlaceholderProvider;
+import su.nightexpress.nightcore.bridge.placeholder.PlaceholderRegistry;
 import su.nightexpress.nightcore.config.PluginDetails;
+import su.nightexpress.nightcore.integration.placeholder.PAPI;
 
 public class EconomyPlugin extends NightPlugin {
 
@@ -34,6 +37,8 @@ public class EconomyPlugin extends NightPlugin {
     TopManager       topManager;
     @Nullable
     MigrationManager migrationManager;
+
+    private PlaceholderRegistry legacyPlaceholders;
 
     @Override
     @NonNull
@@ -53,6 +58,7 @@ public class EconomyPlugin extends NightPlugin {
     @Override
     public void enable() {
         this.api = new ExcellentEconomyProvider(this);
+        this.legacyPlaceholders = new PlaceholderRegistry();
 
         this.commandManager = new CommandManager(this, this.currencyRegistry);
         this.commandManager.setup();
@@ -81,6 +87,11 @@ public class EconomyPlugin extends NightPlugin {
 
         this.getServer().getServicesManager().register(ExcellentEconomyAPI.class, this.api, this,
             ServicePriority.Normal);
+
+        // Legacy %coinsengine_% placeholders for compatibility.
+        if (PAPI.isPresent() && !this.legacyPlaceholders.isEmpty()) {
+            PAPI.addExpansion(this, this.legacyPlaceholders, "coinsengine");
+        }
     }
 
     @Override
@@ -107,9 +118,18 @@ public class EconomyPlugin extends NightPlugin {
     protected void onShutdown() {
         super.onShutdown();
         this.currencyRegistry.clear();
+        if (this.legacyPlaceholders != null) {
+            this.legacyPlaceholders.clear();
+        }
 
         this.getServer().getServicesManager().unregister(this.api);
         this.api = null;
+    }
+
+    @Override
+    public void addGlobalPlaceholders(@NonNull PlaceholderProvider provider) {
+        super.addGlobalPlaceholders(provider);
+        provider.addPlaceholders(this.legacyPlaceholders);
     }
 
     @NonNull
